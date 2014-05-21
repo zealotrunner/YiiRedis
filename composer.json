@@ -24,7 +24,8 @@
             "ARedisSession.php",
             "ARedisSet.php",
             "ARedisSortedSet.php",
-            "ARedisStatePersister.php"
+            "ARedisStatePersister.php",
+            "ARedisString.php"
         ]
     },
     "require": {
