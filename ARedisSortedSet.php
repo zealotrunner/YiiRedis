@@ -227,4 +227,13 @@ class ARedisSortedSet extends ARedisIterableEntity {
 	{
 		$this->remove($offset);
 	}
+
+	public function getScore($key) {
+		$score = $this->getConnection()->getClient()->zScore($this->name,$key);
+		if (!$score) {
+			return false;
+		}
+		return $score;
+	}
+
 }

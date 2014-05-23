@@ -83,7 +83,6 @@ class ARedisHash extends ARedisIterableEntity {
 		return $this->_data;
 	}
 
-
 	/**
 	 * Returns whether there is an item at the specified offset.
 	 * This method is required by the interface ArrayAccess.
@@ -126,5 +125,17 @@ class ARedisHash extends ARedisIterableEntity {
 	public function offsetUnset($offset)
 	{
 		$this->remove($offset);
+	}
+
+	public function mSet($fields) {
+		if ($this->name === null) {
+			throw new CException(get_class($this)." requires a name!");
+		}
+		if ($this->getConnection()->getClient()->hMset($this->name, $fields) === false) {
+			return false;
+		}
+		$this->_data = null;
+		$this->_count = null;
+		return true;
 	}
 }
